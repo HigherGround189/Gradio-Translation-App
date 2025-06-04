@@ -1,5 +1,5 @@
-import gradio as gr
-import requests
+import gradio as gr  # type: ignore
+import requests # type: ignore
 
 # 1. JS to handle SpeechRecognition and update the transcript box
 speech_js = """
@@ -31,20 +31,20 @@ function initSpeech() {
 """
 
 # 2. Python function to call your local LLM summarizer
-def summarize(text):
+def getTranslation(text):
     # adjust URL/port as needed
-    resp = requests.post("http://localhost:8000/summarize", json={"text": text})
-    return resp.json().get("summary", "Error generating summary.")
+    resp = requests.post("http://localhost:8000/getTranslation", json={"text": text})
+    return resp.json().get("translate", "Error generating translation.")
 
 with gr.Blocks(js=speech_js) as demo:
     transcript = gr.Textbox(label="Live Transcript", elem_id="transcript")
-    summary = gr.Textbox(label="Summary")
+    translate = gr.Textbox(label="Translate")
     btn_start = gr.Button("🎤 Start Recording")
     btn_summ = gr.Button("🔀 Translate")
 
     # 3. Wire buttons: start/stop via JS; summarization via Python
     btn_start.click(fn=None, inputs=None, outputs=None, js="() => window.startRec()")
     btn_summ.click(fn=lambda _: None, inputs=None, outputs=None, js="() => window.stopRec()")
-    btn_summ.click(fn=summarize, inputs=transcript, outputs=summary)
+    btn_summ.click(fn=getTranslation, inputs=transcript, outputs=translate)
 
 demo.launch()
