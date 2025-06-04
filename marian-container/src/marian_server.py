@@ -1,7 +1,7 @@
 # marian_server.py
 
 from fastapi import FastAPI, Request # type: ignore
-from marian_manager import MarianManager # type: ignore
+from marian_manager import MarianManager
 
 app = FastAPI()
 manager = MarianManager()
