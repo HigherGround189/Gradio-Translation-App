@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+
+  marian-en-cn:
+    image: marian-en-cn:latest
+    container_name: marian-en-cn
+    ports:
+      - "5003:5003"
+    restart: unless-stopped
+
+  marian-cn-en:
+    image: marian-cn-en:latest
+    container_name: marian-cn-en
+    ports:
+      - "5004:5004"
+    restart: unless-stopped
