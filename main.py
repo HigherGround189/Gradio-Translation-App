@@ -46,6 +46,8 @@ theme = gr.themes.Default(text_size="lg")
 
 # 2. Python function to call your local LLM summarizer (stub logic remains the same)
 def getTranslation(text, isEnglish=True):
+    print(f"Raw input type: {type(text)}, value: '{text}'")
+
     if isEnglish:
         resp = requests.post("http://localhost:5003/translate", json={"text": text})
     else:
@@ -95,11 +97,11 @@ with gr.Blocks(js=speech_js, css=css, theme=theme) as demo:
 
     # --- WIRE BUTTONS ---
     btn_start.click(fn=None, inputs=None, outputs=None, js="() => window.startRec()")
+    btn_summ.click(fn=None, js="() => window.stopRec()")
     btn_summ.click(
         fn=getTranslation,
         inputs=transcript,
-        outputs=translate,
-        js="() => window.stopRec()"
+        outputs=translate
     )
 
 demo.launch()
