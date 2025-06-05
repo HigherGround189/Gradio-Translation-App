@@ -13,3 +13,15 @@ services:
     ports:
       - "5004:5004"
     restart: unless-stopped
+
+  gradio-app:
+    image: gradio-app:latest
+    container_name: gradio-app
+    ports:
+      - "7860:7860"
+    environment:
+      - GRADIO_SERVER_NAME=0.0.0.0
+    depends_on:
+      - marian-en-cn
+      - marian-cn-en
+    restart: unless-stopped

@@ -156,7 +156,7 @@ def getTranslation(text, is_source_english):
         print("Input text is empty. Returning pre-defined message.")
         return "Input text is empty. Nothing to translate."
 
-    endpoint = "http://localhost:5003/translate" if is_source_english else "http://localhost:5004/translate"
+    endpoint = "http://marian-en-cn:5003/translate" if is_source_english else "http://marian-cn-en:5004/translate"
     
     try:
         print(f"Sending request to: {endpoint}")
