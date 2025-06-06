@@ -1,6 +1,8 @@
 services:
 
   marian-en-cn:
+    build:
+      context: ./marian-containers/marian-en-cn
     image: marian-en-cn:latest
     container_name: marian-en-cn
     ports:
@@ -8,6 +10,8 @@ services:
     restart: unless-stopped
 
   marian-cn-en:
+    build:
+      context: ./marian-containers/marian-cn-en
     image: marian-cn-en:latest
     container_name: marian-cn-en
     ports:
@@ -15,6 +19,8 @@ services:
     restart: unless-stopped
 
   gradio-app:
+    build:
+      context: ./gradio-container
     image: gradio-app:latest
     container_name: gradio-app
     ports:
